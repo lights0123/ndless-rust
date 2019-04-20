@@ -1,0 +1,5 @@
+[book]
+authors = ["lights0123"]
+multilingual = false
+src = "src"
+title = "Writing Rust for Ndless"
