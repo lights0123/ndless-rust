@@ -8,3 +8,7 @@
 - [Interacting with the System](Interacting/README.md)
 	- [Message Boxes](Interacting/msg.md)
 	- [Getting input](Interacting/Input.md)
+	- [File I/O](Interacting/File.md)
+- [Helpful Rust Features](Language/README.md)
+	- [Question Mark](Language/question.md)
+	- [Returning from `main`](Language/main.md)

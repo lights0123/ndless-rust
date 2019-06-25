@@ -11,12 +11,12 @@ The following message boxes are supported:
 | Title, message, numeric input with min/max           | [`msg_numeric`]  |
 | Title and two messages & numeric inputs with min/max | [`msg_2numeric`] |
 
-[`msg`]: https://docs.rs/ndless/msg/fn.msg.html
-[`msg_2b`]: https://docs.rs/ndless/msg/fn.msg_2b.html            
-[`msg_3b`]: https://docs.rs/ndless/msg/fn.msg_3b.html            
-[`msg_input`]: https://docs.rs/ndless/msg/fn.msg_input.html      
-[`msg_numeric`]: https://docs.rs/ndless/msg/fn.msg_numeric.html  
-[`msg_2numeric`]: https://docs.rs/ndless/msg/fn.msg_2numeric.html
+[`msg`]: https://docs.rs/ndless/0.8.0/ndless/msg/fn.msg.html
+[`msg_2b`]: https://docs.rs/ndless/0.8.0/ndless/msg/fn.msg_2b.html            
+[`msg_3b`]: https://docs.rs/ndless/0.8.0/ndless/msg/fn.msg_3b.html            
+[`msg_input`]: https://docs.rs/ndless/0.8.0/ndless/msg/fn.msg_input.html      
+[`msg_numeric`]: https://docs.rs/ndless/0.8.0/ndless/msg/fn.msg_numeric.html  
+[`msg_2numeric`]: https://docs.rs/ndless/0.8.0/ndless/msg/fn.msg_2numeric.html
 
 Use it like this:
 
@@ -42,5 +42,5 @@ fn main() {
 
 Pressing escape will return the [first button].
 
-[Button]: https://docs.rs/ndless/msg/enum.Button.html
-[first button]: https://docs.rs/ndless/msg/enum.Button.html#variant.ONE
+[Button]: https://docs.rs/ndless/0.8.0/ndless/msg/enum.Button.html
+[first button]: https://docs.rs/ndless/0.8.0/ndless/msg/enum.Button.html#variant.ONE

@@ -14,9 +14,9 @@ let keys = get_keys();
 if keys.len() == 0 { /* No keys currently pressed */ }
 ```
 
-[`get_keys`]: https://docs.rs/ndless/input/fn.get_keys.html
+[`get_keys`]: https://docs.rs/ndless/0.8.0/ndless/input/fn.get_keys.html
 [`Vec`]: https://doc.rust-lang.org/std/vec/struct.Vec.html
-[`Key`]: https://docs.rs/ndless/input/enum.Key.html
+[`Key`]: https://docs.rs/ndless/0.8.0/ndless/input/enum.Key.html
 
 ## Simple (boolean) functions
 
@@ -27,9 +27,9 @@ if keys.len() == 0 { /* No keys currently pressed */ }
 | Suspends the program until [`any_key_pressed`] returns true.                         | [`wait_key_pressed`]    |
 | Suspends the program until [`any_key_pressed`] returns false.                        | [`wait_no_key_pressed`] |
 
-[`any_key_pressed`]: https://docs.rs/ndless/input/fn.any_key_pressed.html
-[`key_on_pressed`]: https://docs.rs/ndless/input/fn.key_on_pressed.html
-[`wait_key_pressed`]: https://docs.rs/ndless/input/fn.wait_key_pressed.html
-[`wait_no_key_pressed`]: https://docs.rs/ndless/input/fn.wait_no_key_pressed.html
+[`any_key_pressed`]: https://docs.rs/ndless/0.8.0/ndless/input/fn.any_key_pressed.html
+[`key_on_pressed`]: https://docs.rs/ndless/0.8.0/ndless/input/fn.key_on_pressed.html
+[`wait_key_pressed`]: https://docs.rs/ndless/0.8.0/ndless/input/fn.wait_key_pressed.html
+[`wait_no_key_pressed`]: https://docs.rs/ndless/0.8.0/ndless/input/fn.wait_no_key_pressed.html
 
 [input]: https://docs.rs/ndless/input/index.html
