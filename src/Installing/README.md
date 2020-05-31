@@ -1,7 +1,7 @@
 # Installing
 
 This project has several requirements. Specifically, it requires:
-- An up-to-date nightly Rust build (nightly-2019-06-01 works). It's
+- An up-to-date nightly Rust build (nightly-2020-05-31 works). It's
   recommended to install via rustup.
 - `cargo-ndless` and `cargo-generate` (install via `cargo install
   cargo-make cargo-generate`)
