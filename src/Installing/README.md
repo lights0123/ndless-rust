@@ -10,6 +10,5 @@ This project has several requirements. Specifically, it requires:
 The following dependencies will be automatically installed when building
 a project:
 - The `rust-src` component from `rustup`
-- `cargo-xbuild`
 
 See the next page on how to do so on Unix-like platforms.
