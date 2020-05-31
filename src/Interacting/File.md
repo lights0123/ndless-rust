@@ -31,7 +31,6 @@ use ndless::prelude::*;
 use ndless::fs::File;
 use ndless::io::prelude::*;
 
-#[entry]
 fn main() -> ndless::io::Result<()> {
     let mut file = File::create("/documents/test.txt.tns")?;
     file.write_all(b"This replaces the contents of test.txt.tns, or creates the file")?;
@@ -46,7 +45,6 @@ use ndless::prelude::*;
 use ndless::fs::OpenOptions;
 use ndless::io::prelude::*;
 
-#[entry]
 fn main() -> ndless::io::Result<()> {
     let mut file = OpenOptions::new().write(true).open("/documents/test.txt.tns")?;
     file.write_all(b"This replaces the contents of test.txt.tns, or creates the file")?;
@@ -61,7 +59,6 @@ use ndless::prelude::*;
 use ndless::fs::File;
 use ndless::io::prelude::*;
 
-#[entry]
 fn main() -> ndless::io::Result<()> {
     let mut file = File::open("/documents/test.txt.tns")?;
     let mut contents = String::new();
@@ -78,7 +75,6 @@ use ndless::prelude::*;
 use ndless::fs::OpenOptions;
 use ndless::io::prelude::*;
 
-#[entry]
 fn main() -> ndless::io::Result<()> {
     let mut file = OpenOptions::new().read(true).open("/documents/test.txt.tns")?;
     let mut contents = String::new();
@@ -97,7 +93,7 @@ there are great examples available.
 ```rust
 use ndless::prelude::*;
 use ndless::fs::PathBuf;
-#[entry]
+
 fn main() -> ndless::io::Result<()> {
     let path = PathBuf::from("/documents");
     let files = path.read_dir()?;
@@ -114,7 +110,7 @@ Another option to do the same thing:
 ```rust
 use ndless::prelude::*;
 use ndless::fs;
-#[entry]
+
 fn main() -> ndless::io::Result<()> {
     let files = fs::read_dir("/documents");
     for file in files {
