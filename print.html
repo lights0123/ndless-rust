@@ -1,0 +1,578 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Writing Rust for Ndless</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Introduction/why.html"><strong aria-hidden="true">1.1.</strong> Why Rust?</a></li></ol></li><li class="chapter-item expanded "><a href="Installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Installing/Linux.html"><strong aria-hidden="true">2.1.</strong> Linux &amp; Mac</a></li></ol></li><li class="chapter-item expanded "><a href="Creating/index.html"><strong aria-hidden="true">3.</strong> Creating a Project</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Creating/Sample.html"><strong aria-hidden="true">3.1.</strong> Sample Projects</a></li></ol></li><li class="chapter-item expanded "><a href="Interacting/index.html"><strong aria-hidden="true">4.</strong> Interacting with the System</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Interacting/msg.html"><strong aria-hidden="true">4.1.</strong> Message Boxes</a></li><li class="chapter-item expanded "><a href="Interacting/Input.html"><strong aria-hidden="true">4.2.</strong> Keypad Input</a></li><li class="chapter-item expanded "><a href="Interacting/File.html"><strong aria-hidden="true">4.3.</strong> File I/O</a></li><li class="chapter-item expanded "><a href="Interacting/Graphics.html"><strong aria-hidden="true">4.4.</strong> Graphics</a></li></ol></li><li class="chapter-item expanded "><a href="Language/index.html"><strong aria-hidden="true">5.</strong> Helpful Rust Features</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Language/question.html"><strong aria-hidden="true">5.1.</strong> Question Mark</a></li><li class="chapter-item expanded "><a href="Language/main.html"><strong aria-hidden="true">5.2.</strong> Returning from main</a></li></ol></li><li class="chapter-item expanded "><a href="About/index.html"><strong aria-hidden="true">6.</strong> About</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Writing Rust for Ndless</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><strong>We recommend that if you've never used Rust before, you should check
+out the <a href="https://www.rust-lang.org/learn/get-started">Getting started guide</a> in addition to <a href="https://doc.rust-lang.org/book/">the Rust book</a>. There
+are also many other great tools available at the <a href="https://www.rust-lang.org/learn">Rust learning page</a>.
+You should also check out the <a href="https://www.rust-lang.org/">Rust website</a> for up-to-date
+information.</strong></p>
+<h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<p>The TI-Nspire has many options for writing programs. The calculator
+officially supports Lua, and Ndless programs are typically written in C
+or C++. This project aims to add Rust to that list of supported
+languages.</p>
+<h2><a class="header" href="#what-is-ndless" id="what-is-ndless">What is Ndless?</a></h2>
+<p><a href="https://github.com/ndless-nspire/Ndless">Ndless</a> is a popular program written for the TI-Nspire, which allows
+running arbitrary code, bypassing TI's restrictions. It has a complete
+toolchain for compiling, linking, and packaging TI-Nspire programs.</p>
+<h2><a class="header" href="#what-is-rust" id="what-is-rust">What is Rust?</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Rust_(programming_language)">Rust</a> is a modern language that's main focus is safety. For example, if
+you never type the word <code>unsafe</code> in your code, <strong>your program will never
+segfault</strong>. It has no runtime or overhead (such as in Python, Go, Java,
+JS, or C#)—just straight machine code. Its zero-cost abstractions allow
+you to feel like you're writing in a high level language, but compiles
+down to exactly what you would write in C or assembly. Rust was the most
+loved language in the 2016, 2017, 2018, and 2019 StackOverflow Developer
+Survey. In benchmarks, Rust is usually in between C and C++ in terms of
+speed, but while maintaining an easy-to-use syntax with extremely
+helpful error messages, that often provide the fix in the message. Rust
+uses <a href="https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization">RAII</a>, meaning that no garbage collector is needed, but there is
+no need to manually allocate and free memory. Rust combines speed of
+procedural languages with the ease-of-use of functional languages in
+one, creating one powerful language.</p>
+<blockquote>
+<h1><a class="header" href="#note" id="note">Note</a></h1>
+<p>As ndless does not feature a full OS, only <code>#![no_std]</code> features are
+available. These include the <a href="https://doc.rust-lang.org/nightly/core/">core</a>, <a href="https://doc.rust-lang.org/nightly/alloc/">alloc</a>, and <a href="http://docs.rs/ndless/">ndless</a>
+libraries. The Rust <code>std</code> library <strong>is not available</strong>. However, the
+<a href="http://docs.rs/ndless/">ndless</a> crate attempts to recreate as many of the features
+in <code>std</code>. This means that any crates used will need to support
+<code>no_std</code>. This may involve configuring special features in your
+<code>Cargo.toml</code>.</p>
+</blockquote>
+<h1><a class="header" href="#why-rust" id="why-rust">Why Rust?</a></h1>
+<ul>
+<li><a href="https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/rust.html">Rust is fast</a>: Rust is beats C++ in many cases, and C in some.</li>
+<li>Rust is safe: Rust guarantees safety. What does that mean? Rust
+guarantees that you will never read past the end of a pointer, <code>free</code>
+something twice (or not at all), or leak memory unless you explicitly
+tell it to. Rust eliminates the concept of <code>null</code>, and instead
+replaces it with a common language item: <a href="https://doc.rust-lang.org/stable/rust-by-example/std/option.html?highlight=Option#option"><code>Option</code></a>. The best part:
+Rust has a concept of zero-cost abstractions. This means that safety
+doesn't have any performance penalties!</li>
+<li>Rust has <em>very</em> good error messages: C++ has <a href="https://codegolf.stackexchange.com/a/10470/29261">long and indecipherable</a>
+error messages for simple problems. On the other hand, Rust error
+messages will explain exactly why your program didn't compile, give
+you a suggestion to fix it, and link you to examples of similar
+problems.</li>
+<li>Package manager: Rust has a very good package manager, <a href="https://crates.io">Cargo</a>, which
+has many packages ready to be installed—just copy and paste a line
+from a package's page, and it will be automatically installed.</li>
+<li>Documentation: One of the best reasons why Rust is useful is
+documentation. Web API docs are automatically generated for every
+package on Cargo, which provides examples, explanations, and types.
+<a href="https://docs.rs/ndless/">Here's</a> the documentation for the ndless crate.</li>
+</ul>
+<h1><a class="header" href="#sample-code" id="sample-code">Sample code</a></h1>
+<p>Here's a comparison of common tasks in C vs Rust.</p>
+<h2><a class="header" href="#formatting-text" id="formatting-text">Formatting text</a></h2>
+<p><strong>C</strong></p>
+<p>(Yes, you could use <code>printf</code> directly. This is just to show how one
+would store an intermediate buffer, for purposes such as passing to
+another function.)</p>
+<pre><code class="language-c">const char * msg = &quot;message&quot;;
+const int num = 5;
+// First, get the size needed to store the string
+// Don't forget the + 1! Otherwise, you will have a buffer overflow.
+size_t needed = snprintf(NULL, 0, &quot;%s: %d&quot;, msg, num) + 1;
+// Then, make the buffer
+char *buffer = malloc(needed);
+// Finally, actually store it
+sprintf(buffer, &quot;%s: %d&quot;, msg, num);
+// Print it
+printf(&quot;%s\n&quot;, buffer);
+// Later...
+free(buffer);
+</code></pre>
+<p><strong>Rust</strong></p>
+<pre><pre class="playpen"><code class="language-rust"><span class="boring">fn main() {
+</span>let msg = &quot;message&quot;;
+let num = 5;
+// All in one step
+let buffer = format!(&quot;{}: {}&quot;, msg, num);
+// Print it
+println!(&quot;{}&quot;, buffer);
+// the buffer will automatically be freed
+<span class="boring">}
+</span></code></pre></pre>
+<h1><a class="header" href="#installing" id="installing">Installing</a></h1>
+<p>This project has several requirements. Specifically, it requires:</p>
+<ul>
+<li>An up-to-date nightly Rust build (nightly-2020-05-31 works). It's
+recommended to install via rustup.</li>
+<li><code>cargo-ndless</code> and <code>cargo-generate</code> (install via <code>cargo install cargo-make cargo-generate</code>)</li>
+<li>The ndless toolchain installed</li>
+</ul>
+<p>The following dependencies will be automatically installed when building
+a project:</p>
+<ul>
+<li>The <code>rust-src</code> component from <code>rustup</code></li>
+</ul>
+<p>See the next page on how to do so on Unix-like platforms.</p>
+<h1><a class="header" href="#installing-on-linux--mac" id="installing-on-linux--mac">Installing on Linux &amp; Mac</a></h1>
+<h2><a class="header" href="#install-rust" id="install-rust">Install Rust</a></h2>
+<p>You need:</p>
+<ul>
+<li>Ndless toolchain installed and added to path</li>
+<li>Rustup installed</li>
+<li>Latest Rust Nightly installed (nightly-2020-05-07 works)</li>
+<li>Unix-like (tested on Linux, most likely Mac and Cygwin will work as well)</li>
+</ul>
+<p>Complete install script:</p>
+<pre><code class="language-bash">curl https://sh.rustup.rs -sSf | sh # skip if rustup already installed
+rustup install nightly # skip if nightly already installed
+cargo install cargo-ndless
+</code></pre>
+<h2><a class="header" href="#install-ndless" id="install-ndless">Install ndless</a></h2>
+<p>Follow the steps described in the <a href="https://github.com/ndless-nspire/Ndless/wiki/Ndless-SDK:-C-and-assembly-development-introduction">Ndless wiki</a>.</p>
+<blockquote>
+<h2><a class="header" href="#pro-tip" id="pro-tip">Pro tip</a></h2>
+<p>Although you can permanently add the ndless tools to your PATH as suggested in the wiki, you may not want to as that will mess with other projects that use <code>arm-none-eabi-gcc</code> and similar commands. Instead, you may set the environment variable <code>NDLESS_HOME</code> to the path to your installation of Ndless, i.e. the folder that you <code>git clone</code>d.</p>
+<p>For example, if you ran <code>git clone --recursive https://github.com/ndless-nspire/Ndless.git</code> in your home directory, you could add <code>export NDLESS_HOME=&quot;$HOME/Ndless&quot;</code> to the end of your <code>~/.bash_profile</code>. If you're using cargo-ndless as suggested, the correct directories will automatically be added to your <code>PATH</code> variable.</p>
+</blockquote>
+<h1><a class="header" href="#creating-a-project" id="creating-a-project">Creating a Project</a></h1>
+<p>Run <code>cargo generate --git https://github.com/lights0123/nspire-rust-template.git</code>. It will prompt
+you to name it. After naming your project, it will create a new folder
+with a Rust template.</p>
+<p>Get started by running</p>
+<pre><code class="language-bash">cargo +nightly ndless build
+</code></pre>
+<p>to start development. Your .tns file will be available in
+<code>target/armv5te-nspire-eabi/debug/{{project-name}}.tns</code>.</p>
+<p>When you're ready to release your application,
+<strong>don't forget to compile in release mode</strong> with</p>
+<pre><code class="language-bash">cargo +nightly ndless build -- --release
+</code></pre>
+<p>Your .tns file will be available in
+<code>target/armv5te-nspire-eabi/release/{{project-name}}.tns</code>.</p>
+<p>If you have the Firebird emulator installed, you can also send the compiled
+binary straight to it. Just run:</p>
+<pre><code class="language-bash">cargo +nightly ndless run
+cargo +nightly ndless run -- --release
+</code></pre>
+<p>You may skip <code>+nightly</code> if you set nightly as your default compiler
+(<code>rustup default nightly</code>), or
+<a href="https://github.com/rust-lang/rustup.rs#directory-overrides">set a directory override</a>.</p>
+<h1><a class="header" href="#sample-projects" id="sample-projects">Sample projects</a></h1>
+<p>There's a few examples of ndless programs written in Rust. See the <a href="https://github.com/lights0123/example-nspire">example-nspire</a> repository for some generic examples. Additionally, the <a href="https://github.com/lights0123/n-89">n-89</a> and <a href="https://github.com/lights0123/n-flashcards">n-flashcards</a> projects are written in Rust. Note that these may contain older methods of writing code. This book and the API documents of the <a href="https://github.com/lights0123/ndless-rs/">various ndless-rs crates</a> are the most up-to-date sources of information.</p>
+<h1><a class="header" href="#interacting-with-the-system" id="interacting-with-the-system">Interacting with the System</a></h1>
+<p>The Nspire has many different parts, many of which can be interacted
+with in Rust.</p>
+<h1><a class="header" href="#message-boxes" id="message-boxes">Message Boxes</a></h1>
+<p>There are various types of message boxes with <code>ndless</code>. The following
+message boxes are supported:</p>
+<table><thead><tr><th align="left">Type</th><th align="left">Function</th></tr></thead><tbody>
+<tr><td align="left">Title, message, OK Button</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/msg/fn.msg.html"><code>msg</code></a></td></tr>
+<tr><td align="left">Title, message, 2 custom buttons</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/msg/fn.msg_2b.html"><code>msg_2b</code></a></td></tr>
+<tr><td align="left">Title, message, 3 custom buttons</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/msg/fn.msg_3b.html"><code>msg_3b</code></a></td></tr>
+<tr><td align="left">Title, message, string input with default</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/msg/fn.msg_input.html"><code>msg_input</code></a></td></tr>
+<tr><td align="left">Title, message, numeric input with min/max</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/msg/fn.msg_numeric.html"><code>msg_numeric</code></a></td></tr>
+<tr><td align="left">Title and two messages &amp; numeric inputs with min/max</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/msg/fn.msg_2numeric.html"><code>msg_2numeric</code></a></td></tr>
+</tbody></table>
+<p>Use it like this:</p>
+<pre><code class="language-rust noplaypen">fn main() {
+	ndless::msg::msg(&quot;Title&quot;, &quot;Message&quot;);
+}
+</code></pre>
+<p>Message boxes with more than one button return a variant of <a href="https://docs.rs/ndless/*/ndless/msg/enum.Button.html">Button</a>.
+Use it like:</p>
+<pre><code class="language-rust noplaypen">fn main() {
+	let button_pressed = msg_3b(&quot;Hello&quot;, &quot;Hello, World!&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;);
+	let message = match button_pressed {
+		Button::ONE =&gt; &quot;one&quot;,
+		Button::TWO =&gt; &quot;two&quot;,
+		Button::THREE =&gt; &quot;three&quot;,
+	};
+}
+</code></pre>
+<p>Pressing escape will return the <a href="https://docs.rs/ndless/*/ndless/msg/enum.Button.html#variant.ONE">first button</a>.</p>
+<h1><a class="header" href="#getting-input" id="getting-input">Getting Input</a></h1>
+<p>Currently, the <code>ndless</code> crate supports input from the keyboard and
+touchpad. The <a href="https://docs.rs/ndless/input/index.html">input</a> module contains these functions.</p>
+<p>Use <a href="https://docs.rs/ndless/*/ndless/input/fn.get_keys.html"><code>get_keys</code></a> to get a <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a> of <a href="https://docs.rs/ndless/*/ndless/input/enum.Key.html"><code>Key</code></a>s that are currently being
+pressed. An empty <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec</code></a> will be returned if no keys are currently
+pressed. See the following example:</p>
+<pre><code class="language-rust noplaypen">use ndless::input::{get_keys, Key};
+
+let keys = get_keys();
+if keys.len() == 0 { /* No keys currently pressed */ }
+</code></pre>
+<p>However, a more efficient way is to use <a href="https://docs.rs/ndless/*/ndless/input/fn.iter_keys.html"><code>iter_keys</code></a>, which does not
+allocate. However, it must be used immediately, as each iteration of the
+loop checks if the key is being pressed at that time. For example:</p>
+<pre><code class="language-rust noplaypen">use ndless::prelude::*;
+use ndless::input::iter_keys;
+for key in iter_keys() {
+    println!(&quot;Key {:?} is being pressed.&quot;, key);
+}
+</code></pre>
+<p>Additionally, it may be used like any other <a href="https://doc.rust-lang.org/core/iter/trait.Iterator.html"><code>Iterator</code></a> in Rust:</p>
+<pre><code class="language-rust noplaypen">// Print all keys except escape
+use ndless::prelude::*;
+use ndless::input::{iter_keys, Key};
+iter_keys()
+    .filter(|key| key != Key::Esc)
+    .for_each(|key| println!(&quot;Key {:?} is being pressed.&quot;, key));
+</code></pre>
+<h2><a class="header" href="#simple-boolean-functions" id="simple-boolean-functions">Simple (boolean) functions</a></h2>
+<table><thead><tr><th align="left">Description</th><th align="left">Function</th></tr></thead><tbody>
+<tr><td align="left">Returns true if the specific key is pressed. Note that you may pass either an owned <a href="https://docs.rs/ndless/*/ndless/input/enum.Key.html"><code>Key</code></a> or a borrowed <a href="https://docs.rs/ndless/*/ndless/input/enum.Key.html"><code>&amp;Key</code></a>.</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/input/fn.is_key_pressed.html"><code>is_key_pressed</code></a></td></tr>
+<tr><td align="left">Returns true if any buttons are currently pressed, including pushing the touchpad.</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/input/fn.any_key_pressed.html"><code>any_key_pressed</code></a></td></tr>
+<tr><td align="left">Returns true if the &quot;On&quot; key is currently pressed.</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/input/fn.key_on_pressed.html"><code>key_on_pressed</code></a></td></tr>
+<tr><td align="left">Suspends the program until <a href="https://docs.rs/ndless/*/ndless/input/fn.any_key_pressed.html"><code>any_key_pressed</code></a> returns true.</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/input/fn.wait_key_pressed.html"><code>wait_key_pressed</code></a></td></tr>
+<tr><td align="left">Suspends the program until <a href="https://docs.rs/ndless/*/ndless/input/fn.any_key_pressed.html"><code>any_key_pressed</code></a> returns false.</td><td align="left"><a href="https://docs.rs/ndless/*/ndless/input/fn.wait_no_key_pressed.html"><code>wait_no_key_pressed</code></a></td></tr>
+</tbody></table>
+<h1><a class="header" href="#file-io" id="file-io">File I/O</a></h1>
+<p>The <code>ndless</code> crate has the ability to interact with the nspire's file
+system. It does so by maintaining an API similar to that of the Rust
+standard library. <a href="https://docs.rs/ndless/*/ndless/fs/struct.File.html">Check out the documentation</a> for
+up-to-date information.</p>
+<blockquote>
+<h1><a class="header" href="#note-1" id="note-1">Note</a></h1>
+<p>If an absolute path is not specified, all paths are relative to the
+executable. For example, <code>/documents/test.tns</code> will always reference
+that file. However, if the executable is at
+<code>/documents/ndless/app.tns</code>, both <code>test.tns</code> and <code>./test.tns</code> will
+refer to <code>/documents/ndless/test.tns</code>. <strong>This is different from the
+default behavior of the C version.</strong></p>
+<p>Remember that all paths on the TI-Nspire start with <code>/documents</code>, and
+all visible files have the extension <code>.tns</code>.</p>
+<p>Many examples here use several advanced Rust features. If you are new
+to the language, we recommend checking out the <a href="Interacting/../Language/question.html">question mark</a> and
+<a href="Interacting/../Language/main.html">returning from main</a> features.</p>
+</blockquote>
+<h2><a class="header" href="#creating-a-new-file" id="creating-a-new-file">Creating a new file</a></h2>
+<pre><pre class="playpen"><code class="language-rust">use ndless::prelude::*;
+use ndless::fs::File;
+use ndless::io::prelude::*;
+
+fn main() -&gt; ndless::io::Result&lt;()&gt; {
+    let mut file = File::create(&quot;/documents/test.txt.tns&quot;)?;
+    file.write_all(b&quot;This replaces the contents of test.txt.tns, or creates the file&quot;)?;
+    Ok(())
+}
+</code></pre></pre>
+<p>Another option to do the same thing:</p>
+<pre><pre class="playpen"><code class="language-rust">use ndless::prelude::*;
+use ndless::fs::OpenOptions;
+use ndless::io::prelude::*;
+
+fn main() -&gt; ndless::io::Result&lt;()&gt; {
+    let mut file = OpenOptions::new().write(true).open(&quot;/documents/test.txt.tns&quot;)?;
+    file.write_all(b&quot;This replaces the contents of test.txt.tns, or creates the file&quot;)?;
+    Ok(())
+}
+</code></pre></pre>
+<h2><a class="header" href="#reading-a-file" id="reading-a-file">Reading a file</a></h2>
+<pre><pre class="playpen"><code class="language-rust">use ndless::prelude::*;
+use ndless::fs::File;
+use ndless::io::prelude::*;
+
+fn main() -&gt; ndless::io::Result&lt;()&gt; {
+    let mut file = File::open(&quot;/documents/test.txt.tns&quot;)?;
+    let mut contents = String::new();
+    file.read_to_string(&amp;mut contents)?;
+    assert_eq!(contents, &quot;This replaces the contents of test.txt.tns, or creates the file!&quot;);
+    Ok(())
+}
+</code></pre></pre>
+<p>Another option to do the same thing:</p>
+<pre><pre class="playpen"><code class="language-rust">use ndless::prelude::*;
+use ndless::fs::OpenOptions;
+use ndless::io::prelude::*;
+
+fn main() -&gt; ndless::io::Result&lt;()&gt; {
+    let mut file = OpenOptions::new().read(true).open(&quot;/documents/test.txt.tns&quot;)?;
+    let mut contents = String::new();
+    file.read_to_string(&amp;mut contents)?;
+    assert_eq!(contents, &quot;This replaces the contents of test.txt.tns, or creates the file!&quot;);
+    Ok(())
+}
+</code></pre></pre>
+<h2><a class="header" href="#viewing-the-contents-of-a-directory" id="viewing-the-contents-of-a-directory">Viewing the contents of a directory</a></h2>
+<p>Be sure to check out the
+<a href="https://docs.rs/ndless/*/ndless/fs/fn.read_dir.html">docs</a> on this, as
+there are great examples available.</p>
+<pre><pre class="playpen"><code class="language-rust">use ndless::prelude::*;
+use ndless::fs::PathBuf;
+
+fn main() -&gt; ndless::io::Result&lt;()&gt; {
+    let path = PathBuf::from(&quot;/documents&quot;);
+    let files = path.read_dir()?;
+    for file in files {
+        let file = file?;
+        println!(&quot;Path: {:?}&quot;, file.path());
+    }
+    Ok(())
+}
+</code></pre></pre>
+<p>Another option to do the same thing:</p>
+<pre><pre class="playpen"><code class="language-rust">use ndless::prelude::*;
+use ndless::fs;
+
+fn main() -&gt; ndless::io::Result&lt;()&gt; {
+    let files = fs::read_dir(&quot;/documents&quot;);
+    for file in files {
+        let file = file?;
+        println!(&quot;Path: {:?}&quot;, file.path());
+    }
+    Ok(())
+}
+</code></pre></pre>
+<p>Currently, graphics is done with SDL. Use the <a href="https://docs.rs/ndless-sdl">ndless-sdl</a> crate to do
+so. You'll first need to initialize the screen at the beginning of your
+<code>main</code> function:</p>
+<pre><code class="language-rust noplaypen">use ndless_sdl::{SurfaceFlag, VideoFlag};
+ndless_sdl::init(&amp;[ndless_sdl::InitFlag::Video]);
+let screen = ndless_sdl::video::set_video_mode(
+    320,
+    240,
+    16,
+    &amp;[SurfaceFlag::SWSurface],
+    &amp;[VideoFlag::NoFrame],
+)
+.expect(&quot;failed to set video mode&quot;);
+</code></pre>
+<p>Then, at the end, stop it:</p>
+<pre><code class="language-rust noplaypen">ndless_sdl::quit();
+</code></pre>
+<p>Now, you can draw on the screen with the <code>screen</code> variable, which is a
+<a href="https://docs.rs/ndless-sdl/*/ndless_sdl/video/struct.Surface.html"><code>Surface</code></a>. Typically, you'll want to use <a href="https://docs.rs/ndless-sdl/*/ndless_sdl/video/struct.Surface.html#method.fill_rect"><code>fill_rect</code></a> to draw
+rectangles, <a href="https://docs.rs/ndless-sdl/*/ndless_sdl/video/struct.Surface.html#method.draw_str"><code>draw_str</code></a> to draw low-res text, and <a href="https://docs.rs/ndless-sdl/*/ndless_sdl/video/struct.Surface.html#method.blit_rect"><code>blit_rect</code></a> to draw
+images loaded by the <a href="https://docs.rs/ndless-sdl/*/ndless_sdl/image/index.html"><code>image</code></a> module. When you're ready to display to
+the screen, call <a href="https://docs.rs/ndless-sdl/*/ndless_sdl/video/struct.Surface.html#method.flip"><code>screen.flip()</code></a>. For a basic example, see
+<a href="https://github.com/lights0123/example-nspire/tree/master/hello-world-sdl">hello-world-sdl</a>. For a more advanced example loading a real font, see
+<a href="https://github.com/lights0123/example-nspire/tree/master/hello-world-text">hello-world-text</a>. For a real program using fonts and images, see
+<a href="https://github.com/lights0123/n-flashcards">n-flashcards</a>.</p>
+<p>Rust has many features that make it great to use. Check out some of them
+listed here, or as listed on <a href="https://doc.rust-lang.org/book/">the Rust book</a>.</p>
+<h1><a class="header" href="#the-question-mark-operator-" id="the-question-mark-operator-">The question mark operator, <code>?</code></a></h1>
+<p>When returning a <a href="https://doc.rust-lang.org/std/result/index.html"><code>Result</code></a> from a function, it can get tedious to have
+to continuously check for errors from each function. Use the question
+mark operator to automatically return the error if one occurs. <a href="https://doc.rust-lang.org/std/result/index.html#the-question-mark-operator-">Check
+out the docs</a> for more on this topic.</p>
+<p>Note that this can also be used with <a href="https://doc.rust-lang.org/std/option/index.html"><code>Option</code></a> as well, where using the
+<code>?</code> operator will return <code>None</code> if the value is <code>None</code>.</p>
+<h1><a class="header" href="#returning-from-main" id="returning-from-main">Returning from <code>main</code></a></h1>
+<p>In some code, especially related to File I/O, error handling is
+important. If you would prefer to allow your application to exit with an
+error while still freeing memory and closing files without creating your
+own error handler, this feature is perfect for you. Simply return a
+<code>Result</code> from your function. If an error occurs, then a message box will
+be displayed that describes the error. This is different from using
+<code>.unwrap</code> or <code>.expect</code>, as resources will be properly released, and a
+nicer error is shown.</p>
+<p>You can allow this to work on arbitrary types. Follow the documentation
+of the <a href="https://docs.rs/ndless/*/ndless/process/trait.Termination.html"><code>Termination</code></a> trait.</p>
+<h1><a class="header" href="#about" id="about">About</a></h1>
+<p>This project was created by <a href="https://lights0123.com">Ben Schattinger</a> (<a href="https://github.com/lights0123">GitHub</a>) as an easier way to write Ndless apps for the TI-Nspire. I was frustrated with <a href="https://en.cppreference.com/w/cpp/language/rule_of_three">the odd parts</a> <a href="https://github.com/ndless-nspire/Ndless/blob/9ad392aca8874412f69492cf67d216efc3f62415/ndless-sdk/samples/freetype/Makefile#L38">of C and C++</a> and the need to remember to manually <code>free</code> memory.</p>
+<p>Feel free to improve <a href="https://github.com/lights0123/ndless-rust">this book</a> by submitting a Pull Request. Feel free to any questions by <a href="https://github.com/lights0123/ndless-rs/issues/new">opening an issue</a> on the <a href="https://github.com/lights0123/ndless-rs">ndless-rs</a> repository.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
